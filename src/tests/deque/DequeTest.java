@@ -6,6 +6,10 @@ import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * @author Ante Skoric, Timo Quednau
+ * The test test the class Deque.
+ */
 class DequeTest{
     private Deque<Integer> emptyDeque = new Deque<>();
     private Deque<Integer> dequeOne = new Deque<>();
@@ -107,5 +111,41 @@ class DequeTest{
         dequeOne.addFirst(1);
         assertTrue(emptyDeque.isEmpty());
         assertFalse(dequeOne.isEmpty());
+    }
+    /**
+     * Tests the equals method of the class.
+     */
+    @Test
+    void equals(){
+        Deque<Integer> dequeIntOne = new Deque<>();
+        dequeIntOne.addFirst(1);
+        dequeIntOne.addLast(2);
+        Deque<Integer> dequeIntTwo = new Deque<>();
+        dequeIntTwo.addFirst(1);
+        dequeIntTwo.addLast(2);
+        assertTrue(dequeIntOne.equals(dequeIntTwo));
+        Deque<Integer> dequeEmptyTwo = new Deque<>();
+        assertTrue(emptyDeque.equals(dequeEmptyTwo));
+    }
+    /**
+     * Tests the hashCode of the objects
+     */
+    @Test
+    void testHashCode(){
+        Deque<Integer> dequeHash = new Deque<>();
+        dequeHash.addFirst(1);
+        final int hashCodeOne = dequeHash.hashCode();
+        dequeHash.removeFirst();
+        final int hashCodeTwo = dequeHash.hashCode();
+        assertSame(hashCodeOne,hashCodeTwo);
+    }
+    /**
+     * Tests the size method of the class.
+     */
+    @Test
+    void size(){
+        dequeTwo.addFirst(1);
+        assertEquals(1,dequeTwo.size());
+        assertEquals(0,emptyDeque.size());
     }
 }

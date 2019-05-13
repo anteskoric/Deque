@@ -3,6 +3,7 @@ package deque;
 import interfaces.IDeque;
 
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 /**
  * @author Ante Skoric, Timo Quednau
@@ -45,7 +46,7 @@ public class Deque<E> implements IDeque<E> {
         }
     }
     /**
-     * Adds head on the head position of the deque.
+     * Adds element on the head position of the deque.
      * @param element is the head of the typ E.
      */
     @Override
@@ -65,7 +66,7 @@ public class Deque<E> implements IDeque<E> {
     }
 
     /**
-     * Adds head on the last position of the deque.
+     * Adds element on the last position of the deque.
      * @param element is the head of the typ E.
      */
     @Override
@@ -90,52 +91,55 @@ public class Deque<E> implements IDeque<E> {
      */
     @Override
     public E removeFirst () throws NoSuchElementException {
-
+        if(this.isEmpty()){
+            throw new NoSuchElementException("The deque is empty");
+        }
+        final E first = this.head.element;
+        this.head = new Node<>(this.head.previous,this.head.next.element,this.head.next.next);
         size--;
-        return null;
+        return first;
     }
 
     /**
-     * Removes and retrieves the last head of the deque.
-     * @return the last head of the deque.
+     * Removes and retrieves the last element of the deque.
+     * @return the last element of the deque.
      * @throws NoSuchElementException if the deque is empty.
      */
     @Override
     public E removeLast () throws NoSuchElementException {
+        if(this.isEmpty()){
+            throw new NoSuchElementException("The deque is empty");
+        }
+        final E last = this.head.previous.element;
+        this.head.previous = new Node<>(this.head.previous.previous.previous,this.head.previous.previous.element,this.head);
         size--;
-        return null;
+        return last;
     }
 
     /**
-     * Retrieves the head head of the deque, without removing it.
-     * @return the head head of the deque.
+     * Retrieves the first element of the deque, without removing it.
+     * @return the head of the deque.
      * @throws NoSuchElementException if the deque is empty.
      */
     @Override
-    //TODO do i need to check if it is empty?
     public E getFirst () throws NoSuchElementException {
+        if(this.isEmpty()){
+            throw new NoSuchElementException("The deque is empty");
+        }
         return this.head.element;
     }
 
     /**
-     * Retrieves the last head of the deque, without removing it.
-     * @return the last head of the deque.
+     * Retrieves the last element of the deque, without removing it.
+     * @return the last element of the deque.
      * @throws NoSuchElementException if the deque is empty.
      */
-    //TODO do i need to check if it is empty?
     @Override
     public E getLast ()throws NoSuchElementException {
+        if(this.isEmpty()){
+            throw new NoSuchElementException("The deque is empty");
+        }
         return this.head.previous.element;
-    }
-
-    /**
-     * Checks if the deque contains elements.
-     * @return true if the deque is empty.
-     */
-    @Override
-    public String toString(){
-        String elements = this.head + "";
-        return elements;
     }
 
     /**
@@ -147,11 +151,43 @@ public class Deque<E> implements IDeque<E> {
     }
 
     /**
-     * Check if the deque is empty.
-     * @return boolean.
+     * Checks if the deque contains elements.
+     * @return true if the deque is empty.
      */
     @Override
     public boolean isEmpty () {
         return this.head == null;
+    }
+
+    /**
+     * Iterates all elements of the deque and returns it in a form of string.
+     * @return String.
+     */
+    @Override
+    public String toString(){
+        return "";
+    }
+
+    /**
+     * Return true if the two objects are equal.
+     * @param o is the object that we want to compare.
+     * @return boolean.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Deque)) return false;
+        Deque<?> deque = (Deque<?>) o;
+        return size == deque.size &&
+                Objects.equals(head, deque.head);
+    }
+
+    /**
+     * Returns the hashCode.
+     * @return int.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(head, size);
     }
 }
