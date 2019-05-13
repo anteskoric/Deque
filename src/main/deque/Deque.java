@@ -9,16 +9,33 @@ import java.util.NoSuchElementException;
  * This class represents a deque.
  */
 public class Deque<E> implements IDeque<E> {
-
-    private Node<E> first;
+    /**
+     * Represents the first element of the deque(the head).
+     */
+    private Node<E> head;
+    /**
+     * Represents the size of the deque.
+     */
     private int size;
 
     public Deque() {
     }
 
-    static private class Node<E>{
+    /**
+     * Class Node used in the class Deque, only the class Deque can access the class.
+     */
+    private static class Node<E>{
+        /**
+         * The value of the node.
+         */
         private E element;
+        /**
+         * The previous node.
+         */
         private Node<E> previous;
+        /**
+         * The next node.
+         */
         private Node<E> next;
 
         private Node(Node<E> previous,E element, Node<E> next){
@@ -28,47 +45,59 @@ public class Deque<E> implements IDeque<E> {
         }
     }
     /**
-     * Adds first on the first position of the deque.
-     * @param element is the first of the typ E.
+     * Adds head on the head position of the deque.
+     * @param element is the head of the typ E.
      */
     @Override
     public void addFirst (E element){
-        Node<E> node = new Node<>(null,element,this.first);
-        if(this.first != null){
-            this.first.previous = node;
+        Node<E> firstNode = new Node<>(null,element,null);
+        if(this.head == null){
+            this.head = firstNode;
+            this.head.next = firstNode;
+            this.head.previous = firstNode;
+        }else{
+            Node<E> newFirstNode = new Node<>(this.head.previous,element,this.head);
+            this.head.previous.next = newFirstNode;
+            this.head.previous = newFirstNode;
+            this.head = newFirstNode;
         }
-        this.first = node;
         size++;
     }
 
     /**
-     * Adds first on the last position of the deque.
-     * @param element is the first of the typ E.
+     * Adds head on the last position of the deque.
+     * @param element is the head of the typ E.
      */
     @Override
     public void addLast (E element){
-        Node<E> node = new Node<>(this.first,element,null);
-        if(this.first != null){
-            this.first.next = node;
+        Node<E> lastNode = new Node<>(null,element,null);
+        if(this.head == null){
+            this.head = lastNode;
+            this.head.next = lastNode;
+            this.head.previous = lastNode;
+        }else{
+            Node<E> newLastNode = new Node<>(this.head.previous,element,this.head);
+            this.head.previous.next = newLastNode;
+            this.head.previous = newLastNode;
         }
-        this.first = node;
         size++;
     }
 
     /**
-     * Removes and retrieves the first first of the deque.
+     * Removes and retrieves the head of the deque.
      * @return the head of the deque
      * @throws NoSuchElementException if the deque is empty.
      */
     @Override
     public E removeFirst () throws NoSuchElementException {
+
         size--;
         return null;
     }
 
     /**
-     * Removes and retrieves the last first of the deque.
-     * @return the last first of the deque.
+     * Removes and retrieves the last head of the deque.
+     * @return the last head of the deque.
      * @throws NoSuchElementException if the deque is empty.
      */
     @Override
@@ -78,23 +107,25 @@ public class Deque<E> implements IDeque<E> {
     }
 
     /**
-     * Retrieves the first first of the deque, without removing it.
-     * @return the first first of the deque.
+     * Retrieves the head head of the deque, without removing it.
+     * @return the head head of the deque.
      * @throws NoSuchElementException if the deque is empty.
      */
     @Override
+    //TODO do i need to check if it is empty?
     public E getFirst () throws NoSuchElementException {
-        return this.first.element;
+        return this.head.element;
     }
 
     /**
-     * Retrieves the last first of the deque, without removing it.
-     * @return the last first of the deque.
+     * Retrieves the last head of the deque, without removing it.
+     * @return the last head of the deque.
      * @throws NoSuchElementException if the deque is empty.
      */
+    //TODO do i need to check if it is empty?
     @Override
     public E getLast ()throws NoSuchElementException {
-        return null;
+        return this.head.previous.element;
     }
 
     /**
@@ -103,11 +134,24 @@ public class Deque<E> implements IDeque<E> {
      */
     @Override
     public String toString(){
-        String elements = this.first + "";
+        String elements = this.head + "";
         return elements;
     }
+
+    /**
+     * Returns the size of the deque.
+     * @return size.
+     */
+    public int size(){
+        return size;
+    }
+
+    /**
+     * Check if the deque is empty.
+     * @return boolean.
+     */
     @Override
     public boolean isEmpty () {
-        return this.size == 0;
+        return this.head == null;
     }
 }

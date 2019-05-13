@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class DequeTest{
     private Deque<Integer> emptyDeque = new Deque<>();
     private Deque<Integer> dequeOne = new Deque<>();
+    private Deque<Integer> dequeTwo = new Deque<>();
 
     /**
      * Tests the method addFirst of the class Deque.
@@ -16,6 +17,8 @@ class DequeTest{
     @Test
     void addFirst() {
         dequeOne.addFirst(1);
+        assertEquals(1, dequeOne.getFirst());
+        dequeOne.addLast(2);
         assertEquals(1, dequeOne.getFirst());
         dequeOne.addFirst(2);
         dequeOne.addFirst(3);
@@ -27,7 +30,6 @@ class DequeTest{
      */
     @Test
     void addLast() {
-        assertNull(emptyDeque.getLast());
         dequeOne.addLast(1);
         assertEquals(1,dequeOne.getLast());
         dequeOne.addFirst(2);
@@ -35,6 +37,17 @@ class DequeTest{
         dequeOne.addLast(2);
         dequeOne.addLast(3);
         assertEquals(3,dequeOne.getLast());
+    }
+
+    /**
+     * Test if the head has a reference on the last element
+     */
+    @Test
+    void referenceLast(){
+        dequeOne.addFirst(1);
+        assertSame(dequeOne.getFirst(),dequeOne.getLast());
+        dequeTwo.addLast(2);
+        assertSame(dequeTwo.getFirst(),dequeTwo.getLast());
     }
 
     /**
