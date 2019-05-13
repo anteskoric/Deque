@@ -20,7 +20,6 @@ class DequeTest{
         dequeOne.addFirst(2);
         dequeOne.addFirst(3);
         assertEquals(3,dequeOne.getFirst());
-        assertNull(emptyDeque.getFirst());
     }
 
     /**
@@ -64,7 +63,7 @@ class DequeTest{
         assertEquals(3,dequeOne.removeLast());
         dequeOne.removeLast();
         assertEquals(1,dequeOne.getLast());
-        assertThrows(DequeueEmptyException.class,()->emptyDeque.removeLast());
+        assertThrows(NoSuchElementException.class,()->emptyDeque.removeLast());
     }
 
     /**
@@ -72,7 +71,7 @@ class DequeTest{
      */
     @Test
     void getFirst() {
-        assertThrows(DequeueEmptyException.class,()->emptyDeque.getFirst());
+        assertThrows(NoSuchElementException.class,()->emptyDeque.getFirst());
         dequeOne.addFirst(1);
         assertEquals(1,dequeOne.getFirst());
     }
@@ -82,7 +81,7 @@ class DequeTest{
      */
     @Test
     void getLast() {
-        assertThrows(DequeueEmptyException.class,()->emptyDeque.removeLast());
+        assertThrows(NoSuchElementException.class,()->emptyDeque.removeLast());
         dequeOne.addLast(1);
         assertEquals(1,dequeOne.getLast());
     }
