@@ -165,7 +165,14 @@ public class Deque<E> implements IDeque<E> {
      */
     @Override
     public String toString(){
-        return "";
+        StringBuffer elements = new StringBuffer();
+        elements.append("[");
+        for(int i = 0; i < size; i++){
+            elements.append(this.head.element + " ");
+            this.head = this.head.next;
+        }
+        elements.append("]");
+        return elements.toString();
     }
 
     /**

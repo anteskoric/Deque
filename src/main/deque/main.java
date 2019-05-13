@@ -14,5 +14,7 @@ public class main {
         System.out.println(deque);
         deque.addFirst(3);
         System.out.println(deque);
+        deque.addLast(4);
+        System.out.println(deque);
     }
 }
