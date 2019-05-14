@@ -181,6 +181,7 @@ public class Deque<E> implements IDeque<E> {
      * @return boolean.
      */
     @Override
+    //TODO does not pass all tests
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Deque)) return false;
@@ -194,6 +195,7 @@ public class Deque<E> implements IDeque<E> {
      * @return int.
      */
     @Override
+    //TODO does not pass all tests
     public int hashCode() {
         return Objects.hash(head, size);
     }
