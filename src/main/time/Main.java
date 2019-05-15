@@ -24,5 +24,8 @@ public class Main {
         String europeanFormatString = date.format(formatter);
         LocalDate europeanFormat = LocalDate.parse(europeanFormatString,formatter);
         System.out.println("Random date " + europeanFormat);
+        System.out.println("The next monday " + Time.getDate(LocalDate.now(),"sunday"));
+
+        
     }
 }
