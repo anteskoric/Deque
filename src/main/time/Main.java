@@ -24,8 +24,21 @@ public class Main {
         String europeanFormatString = date.format(formatter);
         LocalDate europeanFormat = LocalDate.parse(europeanFormatString,formatter);
         System.out.println("Random date " + europeanFormat);
+
+
+
+        LocalDate month = LocalDate.of(1970,7,2);
+        System.out.println("The name of the month " + month.getMonth());
+        System.out.println("Day of the month " + month.getDayOfMonth());
+        System.out.println("Value of the month " + month.getMonthValue());
+        int monthLength = month.lengthOfMonth();
+        System.out.println("Value of the days that the month contains " + monthLength);
+        System.out.println("The month contains " + monthLength * 24 + " hours");
+        System.out.println("The month contains " + monthLength * 24 * 60 + " minutes");
+        System.out.println("The month contains " + monthLength * 24 * 60 * 3600 + " seconds");
+
         System.out.println("The next monday " + Time.getDate(LocalDate.now(),"sunday"));
 
-        
+
     }
 }
