@@ -9,6 +9,12 @@ import java.time.temporal.TemporalAdjusters;
  * The class Time gives us some usefull methods for manipulation of time.
  */
 public class Time {
+    /**
+     * Gets date of next given day of the given date.
+     * @param date given date.
+     * @param day given day.
+     * @return date of the day that has been given.
+     */
     public static LocalDate getDate(LocalDate date, String day) {
        LocalDate dateOfTheDay = date;
        String ignoreCaseDay = day.toLowerCase();
