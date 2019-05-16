@@ -132,12 +132,13 @@ class DequeTest{
      */
     @Test
     void testHashCode(){
-        Deque<Integer> dequeHash = new Deque<>();
-        dequeHash.addFirst(1);
-        final int hashCodeOne = dequeHash.hashCode();
-        dequeHash.removeFirst();
-        final int hashCodeTwo = dequeHash.hashCode();
-        assertSame(hashCodeOne,hashCodeTwo);
+        Deque<Integer> dequeHashOne = new Deque<>();
+        Deque<Integer> dequeHashTwo = new Deque<>();
+        dequeHashOne.addFirst(1);
+        dequeHashTwo.addFirst(1);
+        final int hashCodeOne = dequeHashOne.hashCode();
+        final int hashCodeTwo = dequeHashTwo.hashCode();
+        assertEquals(hashCodeOne,hashCodeTwo);
     }
     /**
      * Tests the size method of the class.

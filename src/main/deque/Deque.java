@@ -44,6 +44,20 @@ public class Deque<E> implements IDeque<E> {
             this.previous = previous;
             this.next = next;
         }
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Node)) return false;
+            Node<?> node = (Node<?>) o;
+            return Objects.equals(element, node.element) &&
+                    Objects.equals(previous.element, node.previous.element) &&
+                    Objects.equals(next.element, node.next.element);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(element, previous.element, next.element);
+        }
     }
     /**
      * Adds element on the head position of the deque.
@@ -181,7 +195,6 @@ public class Deque<E> implements IDeque<E> {
      * @return boolean.
      */
     @Override
-    //TODO does not pass all tests
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Deque)) return false;
@@ -195,7 +208,6 @@ public class Deque<E> implements IDeque<E> {
      * @return int.
      */
     @Override
-    //TODO does not pass all tests
     public int hashCode() {
         return Objects.hash(head, size);
     }
