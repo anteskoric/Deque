@@ -1,8 +1,9 @@
 package time;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Locale;
 
 /**
  * @author Ante Skoric, Timo Quednau
@@ -11,34 +12,47 @@ import java.time.format.DateTimeFormatter;
 
 public class Main {
     public static void main(String[] args) {
+
         LocalDate dateWithOutTimeZone = LocalDate.now();
         System.out.println("Date with out time-zone " + dateWithOutTimeZone);
+
         ZoneId zoneGermany = ZoneId.of("Europe/Berlin");
         LocalDate dateWithTimeZone = LocalDate.now(zoneGermany);
-        System.out.println("Date with time-zone" + dateWithTimeZone);
-        LocalDate standardFormat = LocalDate.of(1998,02,13);
+        System.out.println("Date with time-zone " + dateWithTimeZone);
+
+        LocalDate standardFormat = LocalDate.of(1998,2,13);
         System.out.println("Random date " + standardFormat);
-        //TODO fix this code
-        LocalDate date = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/uuuu");
-        String europeanFormatString = date.format(formatter);
-        LocalDate europeanFormat = LocalDate.parse(europeanFormatString,formatter);
-        System.out.println("Random date " + europeanFormat);
+
+        String dateEuropeanFormat = LocalDate.now().format(DateTimeFormatter.ofLocalizedDate( FormatStyle.SHORT ).withLocale(Locale.GERMANY));
+        System.out.println("European Format " + dateEuropeanFormat);
+
+        Instant timeOne = Instant.now();
+        Instant timeTwo = Instant.now();
+        Instant endTime = timeTwo.plus(Duration.ofDays(2));
+        System.out.println("Days between two instants " + Duration.between(timeOne,endTime).toDays());
+        System.out.println("Hours between two instants " + Duration.between(timeOne,endTime).toHours());
+        System.out.println("Nanoseconds between two instants " + Duration.between(timeOne,endTime).toNanos());
+        System.out.println("Minutes between two instants " + Duration.between(timeOne,endTime).toMinutes());
+        System.out.println("Seconds between two instants " + Duration.between(timeOne,endTime).toSeconds());
+
+        LocalDate dateOne = LocalDate.of(1970,7,2);
+        LocalDate dateTwo = LocalDate.of(1980,8,3);
+        int years = Period.between(dateOne,dateTwo).getYears();
+        int days = Period.between(dateOne,dateTwo).getDays();
+        int months = Period.between(dateOne,dateTwo).getYears();
+        System.out.println("Year, days and hours between dateOne and dateTwo " + "\n" + "Years " + years + "\n" + "Months " + months + "\n" + "Days " + days);
 
 
-
-        LocalDate month = LocalDate.of(1970,7,2);
-        System.out.println("The name of the month " + month.getMonth());
-        System.out.println("Day of the month " + month.getDayOfMonth());
-        System.out.println("Value of the month " + month.getMonthValue());
-        int monthLength = month.lengthOfMonth();
-        System.out.println("Value of the days that the month contains " + monthLength);
-        System.out.println("The month contains " + monthLength * 24 + " hours");
-        System.out.println("The month contains " + monthLength * 24 * 60 + " minutes");
-        System.out.println("The month contains " + monthLength * 24 * 60 * 3600 + " seconds");
+        System.out.println("The name of the dateOne " + dateOne.getMonth());
+        System.out.println("Day of the dateOne " + dateOne.getDayOfMonth());
+        System.out.println("Value of the dateOne " + dateOne.getMonthValue());
+        int monthLength = dateOne.lengthOfMonth();
+        System.out.println("Value of the days that the dateOne contains " + monthLength);
+        System.out.println("The dateOne contains " + monthLength * 24 + " hours");
+        System.out.println("The dateOne contains " + monthLength * 24 * 60 + " minutes");
+        System.out.println("The dateOne contains " + monthLength * 24 * 60 * 3600 + " seconds");
 
         System.out.println("The next monday " + Time.getDate(LocalDate.now(),"sunday"));
-
 
     }
 }
