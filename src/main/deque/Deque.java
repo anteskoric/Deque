@@ -100,7 +100,7 @@ public class Deque<E> implements IDeque<E> {
 
     /**
      * Removes and retrieves the head of the deque.
-     * @return the head of the deque
+     * @return the head of the deque.
      * @throws NoSuchElementException if the deque is empty.
      */
     @Override
@@ -180,7 +180,7 @@ public class Deque<E> implements IDeque<E> {
     @Override
     public String toString(){
         StringBuilder elements = new StringBuilder();
-        elements.append("[");
+        elements.append("[ ");
         for(int i = 0; i < size; i++){
             elements.append(this.head.element + " ");
             this.head = this.head.next;

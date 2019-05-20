@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Locale;
 
+import static java.time.DayOfWeek.SUNDAY;
+
 /**
  * @author Ante Skoric, Timo Quednau
  * The class Main exicutes the code of the class Time.
@@ -52,7 +54,8 @@ public class Main {
         System.out.println("The dateOne contains " + monthLength * 24 * 60 + " minutes");
         System.out.println("The dateOne contains " + monthLength * 24 * 60 * 3600 + " seconds");
 
-        System.out.println("The next monday " + Time.getDate(LocalDate.now(),"sunday"));
+        System.out.println("The next sunday " + Time.getDate(LocalDate.now(),SUNDAY));
 
+        System.out.println("All year from 1998 till 2060 with 30.09 that fall on sunday " + Time.findDates(MonthDay.of(9,30),SUNDAY,1998,2060));
     }
 }

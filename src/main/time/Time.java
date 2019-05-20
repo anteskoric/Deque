@@ -2,7 +2,10 @@ package time;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.MonthDay;
 import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Ante Skoric, Timo Quednau
@@ -10,39 +13,33 @@ import java.time.temporal.TemporalAdjusters;
  */
 public class Time {
     /**
-     * Gets date of next given day of the given date.
-     * @param date given date.
-     * @param day given day.
-     * @return date of the day that has been given.
+     * Returns the date with the next day of the week.
+     * @param date LocalDate of some specific date.
+     * @param day DayOfWeek of with we want to get the new date.
+     * @return date with new values.
      */
-    public static LocalDate getDate(LocalDate date, String day) {
-       LocalDate dateOfTheDay = date;
-       String ignoreCaseDay = day.toLowerCase();
-       switch (ignoreCaseDay) {
-            case "monday":
-                dateOfTheDay = date.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
-                break;
-            case "tuesday":
-                dateOfTheDay = date.with(TemporalAdjusters.next(DayOfWeek.TUESDAY));
-                break;
-            case "wednesday":
-                dateOfTheDay = date.with(TemporalAdjusters.next(DayOfWeek.WEDNESDAY));
-                break;
-            case "thursday":
-                dateOfTheDay = date.with(TemporalAdjusters.next(DayOfWeek.THURSDAY));
-                break;
-            case "friday":
-                dateOfTheDay = date.with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
-                break;
-            case "saturday":
-                dateOfTheDay = date.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
-                break;
-            case "sunday":
-                dateOfTheDay = date.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
-                break;
-            default:
-                throw new IllegalArgumentException("The given day is not part of the week");
+    public static LocalDate getDate(LocalDate date, DayOfWeek day) {
+        return date.with(TemporalAdjusters.next(day));
+    }
+
+    /**
+     * Returns a list with all dates that start with the year startYear and end at finalYear, the dates in the list
+     * have the same month and day as the input.
+     * @param monthDay The month and day of the year.
+     * @param dayOfWeek The day of the week we want to find.
+     * @param startYear The start year.
+     * @param finalYear The final year.
+     * @return ArrayList with all dates.
+     */
+    public static List<LocalDate> findDates(MonthDay monthDay, DayOfWeek dayOfWeek, int startYear, int finalYear){
+        ArrayList<LocalDate> allDates = new ArrayList<>();
+        LocalDate date = LocalDate.of(startYear,monthDay.getMonth(),monthDay.getDayOfMonth());
+        for(int i = startYear; i <= finalYear; i++){
+            if(date.getDayOfWeek() == dayOfWeek){
+                allDates.add(date);
+            }
+            date = date.plusYears(1);
         }
-        return dateOfTheDay;
+        return allDates;
     }
 }

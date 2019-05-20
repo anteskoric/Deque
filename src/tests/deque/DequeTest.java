@@ -120,9 +120,11 @@ class DequeTest{
         Deque<Integer> dequeIntOne = new Deque<>();
         dequeIntOne.addFirst(1);
         dequeIntOne.addLast(2);
+        dequeIntOne.addFirst(1);
         Deque<Integer> dequeIntTwo = new Deque<>();
         dequeIntTwo.addFirst(1);
         dequeIntTwo.addLast(2);
+        dequeIntTwo.addFirst(1);
         assertTrue(dequeIntOne.equals(dequeIntTwo));
         Deque<Integer> dequeEmptyTwo = new Deque<>();
         assertTrue(emptyDeque.equals(dequeEmptyTwo));
