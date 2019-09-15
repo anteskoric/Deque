@@ -1,4 +1,4 @@
-##University project 6 Aufgabenblatt 06: Generische Klassen und Methoden
+#University project 6 Aufgabenblatt 06: Generische Klassen und Methoden
 
 **`Author: Ante Skoric, Timo Quednau`**
 
