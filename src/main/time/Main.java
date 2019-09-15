@@ -52,7 +52,7 @@ public class Main {
         System.out.println("Value of the days that the dateOne contains " + monthLength);
         System.out.println("The dateOne contains " + monthLength * 24 + " hours");
         System.out.println("The dateOne contains " + monthLength * 24 * 60 + " minutes");
-        System.out.println("The dateOne contains " + monthLength * 24 * 60 * 3600 + " seconds");
+        System.out.println("The dateOne contains " + monthLength * 24 * 60 * 60 + " seconds");
 
         System.out.println("The next sunday " + Time.getDate(LocalDate.now(),SUNDAY));
 
